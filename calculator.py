@@ -1,21 +1,38 @@
-num1 = float(input("Enter first number: "))
-num2 =float(input("Enter second number: "))
-operation = input("Enter operation: *,/,-,+")
+# Step 1: Define operation functions
+def add(a, b):
+    return a + b
 
-if operation == "*":
- result = num1 * num2
- print(f"{num1} * {num2} = {result}")
-elif operation == "-":
- result = num1 - num2
- print(f"{num1} - {num2} = {result}")
-elif operation == "+":
- result = num1 + num2
- print(f"{num1} + {num2} = {result}")
-elif operation == "/":
-     if num2 != 0:
-      result = num1 / num2
-      print(f"{num1} / {num2} = {result}")
-     else:
-      print("Division by zero is not allowed")
-else:
- print("Invalid operation, please enter +, -, *, /: ")
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b == 0:
+        return "Error: Cannot divide by zero"
+    return a / b
+
+# Step 2: Map operations to functions
+operations = {
+    "+": add,
+    "-": subtract,
+    "*": multiply,
+    "/": divide
+}
+
+# Step 3: Get user input
+try:
+    first_number = float(input("Enter the first number: "))
+    second_number = float(input("Enter the second number: "))
+    operation = input("Enter the operation (+, -, *, /): ")
+
+    # Step 4: Perform the operation
+    if operation not in operations:
+        print("Invalid operation. Please choose +, -, *, or /.")
+    else:
+        result = operations[operation](first_number, second_number)
+        print(f"The result of {first_number} {operation} {second_number} is {result}")
+
+except ValueError:
+    print("Invalid input. Please enter valid numbers.")
